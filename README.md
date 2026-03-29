@@ -10,18 +10,17 @@ ServeNow is a comprehensive, production-ready home services marketplace solution
 ### Customer App
 | Home | Services | Booking | Tracking |
 |---|---|---|---|
-| ![Home](screenshots/01_customer_home.jpg) | ![Services](screenshots/02_customer_services.jpg) | ![Booking](screenshots/03_customer_booking.jpg) | ![Tracking](screenshots/04_customer_tracking.jpg) |
+| ![Home](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/01_customer_home.jpg) | ![Services](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/02_customer_services.jpg) | ![Booking](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/03_customer_booking.jpg) | ![Tracking](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/04_customer_tracking.jpg) |
 
 ### Provider App
 | Dashboard | Bookings | Earnings |
 |---|---|---|
-| ![Dashboard](screenshots/06_provider_dashboard.jpg) | ![Bookings](screenshots/07_provider_bookings.jpg) | ![Earnings](screenshots/08_provider_earnings.jpg) |
+| ![Dashboard](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/06_provider_dashboard.jpg) | ![Bookings](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/07_provider_bookings.jpg) | ![Earnings](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/08_provider_earnings.jpg) |
 
 ### Handyman App & Admin Panel
 | Handyman Jobs | Admin Dashboard | Admin Bookings |
 |---|---|---|
-| ![Jobs](screenshots/09_handyman_jobs.jpg) | ![Admin](screenshots/12_admin_dashboard.png) | ![Bookings](screenshots/13_admin_bookings.png) |
-
+| ![Jobs](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/09_handyman_jobs.jpg) | ![Admin](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/12_admin_dashboard.png) | ![Bookings](https://raw.githubusercontent.com/ssurekumar01111-hue/ServeNow/main/screenshots/13_admin_bookings.png) |
 ## 🔴 Live Demo
 
 | | Link |
