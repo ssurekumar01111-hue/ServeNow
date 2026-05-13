@@ -1,0 +1,11 @@
+{
+  "name": "servenow-demo-seed",
+  "version": "1.0.0",
+  "description": "Seed script for ServeNow demo database",
+  "main": "seed_all.js",
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  },
+  "author": "ServeNow",
+  "license": "ISC"
+}

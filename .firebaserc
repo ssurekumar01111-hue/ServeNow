@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "servenow-9440f"
+  },
+  "functions": {
+    "location": "asia-south1"
+  }
+}

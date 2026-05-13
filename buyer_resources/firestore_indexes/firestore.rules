@@ -1,0 +1,93 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is an admin
+    function isAdmin() {
+      return request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // User collection: Own document or admin
+    match /users/{userId} {
+      allow read, write: if request.auth != null && (request.auth.uid == userId || isAdmin());
+    }
+
+    // Bookings collection: Customer creates, participants or admin read/write
+    match /bookings/{bookingId} {
+      allow create: if request.auth != null;
+      allow read: if request.auth != null && (
+        resource.data.customerId == request.auth.uid || 
+        resource.data.providerId == request.auth.uid || 
+        resource.data.handymanId == request.auth.uid || 
+        isAdmin()
+      );
+      allow update: if request.auth != null && (
+        resource.data.providerId == request.auth.uid || 
+        resource.data.handymanId == request.auth.uid || 
+        isAdmin()
+      );
+      
+      // Subcollection for messages
+      match /messages/{messageId} {
+        allow read, write: if request.auth != null && (
+          get(/databases/$(database)/documents/bookings/$(bookingId)).data.customerId == request.auth.uid ||
+          get(/databases/$(database)/documents/bookings/$(bookingId)).data.providerId == request.auth.uid ||
+          get(/databases/$(database)/documents/bookings/$(bookingId)).data.handymanId == request.auth.uid ||
+          isAdmin()
+        );
+      }
+    }
+
+    // Services collection: Auth read, provider/admin write
+    match /services/{serviceId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (resource.data.providerId == request.auth.uid || isAdmin());
+    }
+
+    // Providers collection: Auth read, owner/admin write
+    match /providers/{providerId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && (request.auth.uid == providerId || isAdmin());
+    }
+
+    // Categories collection: Public read, admin write
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Wallets collection: Owner read only
+    match /wallets/{walletId} {
+      allow read: if request.auth != null && request.auth.uid == walletId;
+      allow write: if false; // Only Cloud Functions (Admin SDK)
+    }
+
+    // Coupons collection: Auth read active, admin write
+    match /coupons/{couponId} {
+      allow read: if request.auth != null && resource.data.isActive == true;
+      allow write: if isAdmin();
+    }
+
+    // Reviews collection: Auth read, customer of booking create once, no update
+    match /reviews/{reviewId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.customerId;
+      allow update: if false;
+    }
+
+    // Withdrawals collection: Provider own, admin all/update status
+    match /withdrawals/{withdrawalId} {
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.providerId;
+      allow read: if request.auth != null && (resource.data.providerId == request.auth.uid || isAdmin());
+      allow update: if isAdmin();
+    }
+
+    // App Config: Auth read, admin write
+    match /app_config/{configId} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+  }
+}
